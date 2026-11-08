@@ -1,0 +1,10 @@
+# Pi agent directory — ignore private config before sharing
+
+history/
+npm/
+sessions/
+auth.json
+models-store.json
+pi-web-run/
+pi-web-*
+web-push.json

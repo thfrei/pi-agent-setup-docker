@@ -1,0 +1,44 @@
+services:
+  pi-sandbox:
+    build: .
+    container_name: pi-lecture-env
+    ports:
+      - "30141:30141"
+      - "30142:30142"
+      - "8000:8000"
+    volumes:
+      # Mount parent workspace containing multiple sub-repos (persists across lectures)
+      - ./workspace:/home/node/workspace
+      
+      # Mount model settings (Read-Only to prevent accidental overwrites by students)
+      - ./config:/home/node/.pi/agent/
+
+      # Persist Pi agent's session memory & history across lectures
+      - pi-agent-sessions:/home/node/.pi/agent/history
+
+    environment:
+      - LITELLM_URL=https://litellm.sph-prod.ethz.ch/
+      - LITELLM_API_KEY=${LITELLM_API_KEY}
+      - PYTHONUNBUFFERED=1
+
+    # Security Sandboxing Flags
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - SETUID
+      - SETGID
+
+    # Resource caps to protect student laptops from runaway agent loops
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 4G
+
+    restart: unless-stopped
+
+volumes:
+  pi-agent-sessions:

@@ -1,0 +1,15 @@
+{
+  "providers": {
+    "sph": {
+      "baseUrl": "https://<your litellm>",
+      "api": "openai-completions",
+      "apiKey": "skfasdf",
+      "piGuiCustomEndpoint": true,
+      "models": [
+        {
+          "id": "f"
+        }
+      ]
+    }
+  }
+}
