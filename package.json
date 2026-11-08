@@ -1,0 +1,12 @@
+{
+  "name": "pi-agent-setup-docker",
+  "version": "1.0.0",
+  "description": "Applications inside",
+  "main": "index.js",
+  "scripts": {
+    "start": "podman compose up --build",
+    "build": "podman build"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -1,7 +1,6 @@
 services:
-  pi-sandbox:
+  pi-agent:
     build: .
-    container_name: pi-lecture-env
     ports:
       - "30141:30141"
       - "30142:30142"
